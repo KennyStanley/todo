@@ -12,6 +12,7 @@ import {
 import { useState, useEffect, useCallback } from 'react'
 import { useUser } from 'src/contexts/UserProvider'
 import { Switch } from '@headlessui/react'
+import Image from 'next/image'
 
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -93,11 +94,13 @@ const Menu = ({ logout, closeMenu }: any) => {
     return (
         <>
             <div className="h-screen ">
-                <div className="flex flex-col h-full pb-4 pt-12 px-4 w-72">
+                <div className="-left-full absolute bg-gray-900 flex flex-col h-full md:left-0 md:relative pb-4 pt-12 px-4 w-72 z-10">
                     <header className=" mb-8 px-4 space-y-5">
-                        <img
+                        <Image
                             src={user.pic && user.pic}
                             alt="User Pic"
+                            width={56}
+                            height={56}
                             className="bg-gray-800 h-14 inline-block ring-4 ring-offset-4 ring-offset-gray-900 rounded-full w-14"
                         />
                         <h1 className="font-bold text-3xl w-min">
