@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import middleware from "middlewares/database"
+import middleware from "src/middlewares/database"
 import nextConnect from "next-connect";
 import { Db } from "mongodb";
 import assert from 'assert'
@@ -12,18 +12,17 @@ const handler = nextConnect()
 
 handler.use(middleware)
 
-function findUser(db: Db, email: any, callback: any) {
+function findUser(db: Db, email: string, callback: any) {
     const collection = db.collection('users')
     collection.findOne({ email }, callback)
 }
 
-async function createUser(db: Db, name: string, email: any, password: string | Buffer, callback: any) {
+function createUser(db: Db, name: string, email: any, password: string | Buffer, callback: any) {
     const collection = db.collection('users');
     bcrypt.hash(password, saltRounds, function (err, hash) {
         // Store hash in your password DB.
         collection.insertOne(
             {
-                userId: uuidV4(),
                 name,
                 email,
                 password: hash,
@@ -32,14 +31,11 @@ async function createUser(db: Db, name: string, email: any, password: string | B
                 assert.equal(err, null)
                 callback(userCreated)
             },
-        );
-    });
+        )
+    })
 }
 
-handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-    let doc = await req.body.db.collection('users').find({}).limit(30).toArray()
-    res.json(doc)
-}).post(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     // signup
     try {
         assert.notEqual(null, req.body.name, 'Name required')
@@ -62,11 +58,11 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
         }
         if (!user) {
             // proceed to Create
-            await createUser(db, name, email, password, (creationResult: { ops: string | any[] }) => {
+            createUser(db, name, email, password, (creationResult: { ops: string | any[] }) => {
                 if (creationResult.ops != null && creationResult.ops.length === 1) {
                     const user = creationResult.ops[0];
                     const token = jwt.sign(
-                        { userId: user.userId, email: user.email },
+                        { userId: user._id, email: user.email },
                         jwtSecret,
                         {
                             expiresIn: 3000, //50 minutes

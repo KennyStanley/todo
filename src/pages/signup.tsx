@@ -11,7 +11,7 @@ const Signup = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const res = await fetch('/api/users', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({ name, email, password }),
             credentials: 'same-origin',
         })
@@ -38,7 +38,7 @@ const Signup = () => {
                                 placeholder="Name"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
-                                className="rounded-2xl px-5 py-2 w-full shadow-xl"
+                                className="focus:ring-2 outline-none px-5 py-2 ring-blue-600 rounded-2xl shadow-xl w-full"
                             />
                         </div>
                         <div className="mb-3">
@@ -51,7 +51,7 @@ const Signup = () => {
                                 placeholder="Email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                className="rounded-2xl px-5 py-2 w-full shadow-xl"
+                                className="focus:ring-2 outline-none px-5 py-2 ring-blue-600 rounded-2xl shadow-xl w-full"
                             />
                         </div>
                         <div className="mb-6">
@@ -64,7 +64,7 @@ const Signup = () => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                className="rounded-2xl px-5 py-2 w-full shadow-xl"
+                                className="focus:ring-2 outline-none px-5 py-2 ring-blue-600 rounded-2xl shadow-xl w-full"
                             />
                         </div>
                         <input

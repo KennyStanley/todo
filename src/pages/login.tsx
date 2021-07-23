@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react'
 import Image from 'next/image'
 import Router from 'next/router'
 import cookie from 'js-cookie'
-import Logo from '../../public/logo_icon.svg'
+import Logo from 'public/logo_icon.svg'
 
 const Login = () => {
     const [loginError, setLoginError] = useState('')
@@ -12,7 +12,7 @@ const Login = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const res = await fetch('/api/auth', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 email,
                 password,
@@ -47,7 +47,7 @@ const Login = () => {
                                 placeholder="Email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                className="rounded-2xl px-5 py-2 w-full shadow-xl"
+                                className="focus:ring-2 outline-none px-5 py-2 ring-blue-600 rounded-2xl shadow-xl w-full"
                             />
                         </div>
                         <div className="mb-6">
@@ -60,7 +60,7 @@ const Login = () => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                className="rounded-2xl px-5 py-2 w-full shadow-xl"
+                                className="focus:ring-2 outline-none px-5 py-2 ring-blue-600 rounded-2xl shadow-xl w-full"
                             />
                         </div>
                         <input

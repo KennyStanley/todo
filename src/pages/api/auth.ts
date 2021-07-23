@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import middleware from "middlewares/database"
+import middleware from "src/middlewares/database"
 import nextConnect from "next-connect";
 import { Db } from "mongodb";
 import assert from 'assert'
@@ -33,7 +33,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     const email = req.body.email
     const password = req.body.password
 
-    findUser(db, email, (err: any, user: { userId: string; email: string; password: string }) => {
+    findUser(db, email, (err: any, user: { _id: string; email: string; password: string }) => {
         if (err) {
             res.status(500).json({ error: true, message: 'Error finding User' })
             return
@@ -48,10 +48,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
                 }
                 if (match) {
                     const token = jwt.sign(
-                        { userId: user.userId, email: user.email },
+                        { userId: user._id, email: user.email },
                         jwtSecret,
                         {
-                            expiresIn: 3000, //50 minutes
+                            expiresIn: '1d'
+                            // expiresIn: 3000, //50 minutes
                         },
                     );
                     res.status(200).json({ token })
