@@ -37,7 +37,7 @@ export const CreateTaskForm = ({
 
     return (
         <>
-            <div className="absolute bg-gray-200 dark:bg-gray-950 dark:text-white h-full left-0 p-8 rounded-3xl top-0 w-full">
+            <div className="overflow-hidden absolute bg-gray-200 dark:bg-gray-950 dark:text-white h-full left-0 p-8 rounded-3xl top-0 w-full">
                 <button onClick={close}>
                     <svg
                         className="w-6 dark:text-white"
