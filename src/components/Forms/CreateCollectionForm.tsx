@@ -53,7 +53,7 @@ export const CreateCollectionForm = ({
                 <div className="grid place-items-center gap-10 w-full h-full">
                     <form
                         onSubmit={handleAddCollection}
-                        className="text-center w-80"
+                        className="text-center w-96"
                     >
                         <div className="mb-10">
                             <div className="mt-1 border-b border-gray-300 focus-within:border-blue-600">
@@ -92,7 +92,7 @@ export const CreateCollectionForm = ({
                                                 open
                                                     ? 'text-gray-900'
                                                     : 'text-gray-500',
-                                                'group bg-white rounded-full inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                                'group bg-white rounded-full inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                                             )}
                                         >
                                             <span
