@@ -5,7 +5,8 @@ import { View } from './View'
 const Task = ({ task, updateTask }: { task: ITask; updateTask: any }) => {
     const [isOpen, setIsOpen] = useState(false)
 
-    const completeTask = async () => {
+    const completeTask = async (e: { stopPropagation: () => void }) => {
+        e.stopPropagation()
         let updatedTask = { ...task }
         updatedTask.isCompleted = true
         updateTask(updatedTask)
