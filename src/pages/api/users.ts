@@ -26,6 +26,7 @@ function createUser(db: Db, name: string, email: any, password: string | Buffer,
                 name,
                 email,
                 password: hash,
+                collections: []
             },
             function (err: any, userCreated: any) {
                 assert.equal(err, null)
