@@ -45,7 +45,7 @@ const IndexPage = () => {
                     <>
                         <UserProvider me={user}>
                             <div className="flex w-full h-full bg-gray-900">
-                                <div id="menuContainer">
+                                <div id="menuContainer" className="z-40">
                                     <Menu
                                         logout={logout}
                                         closeMenu={() => setMenuOpen(false)}
